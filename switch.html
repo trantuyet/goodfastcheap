@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .switch {
+            position: relative;
+            display: inline-flex;
+            width: 70px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 40px;
+            width: 40px;
+            left: 0px;
+            bottom: 0px;
+            background-color: #008000;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #008000;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #008000;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 70px;
+        }
+
+        .slider.round:before {
+            border-radius: 100%;
+        }
+
+
+        .switch2 {
+            position: relative;
+            display: inline-flex;
+            width: 70px;
+            height: 20px;
+        }
+
+        .switch2 input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider2 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider2:before {
+            position: absolute;
+            content: "";
+            height: 40px;
+            width: 40px;
+            left: 0px;
+            bottom: 0px;
+            background-color: #B22222;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider2 {
+            background-color: #B22222;
+        }
+
+        input:focus + .slider2 {
+            box-shadow: 0 0 1px #B22222;
+        }
+
+        input:checked + .slider2:before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+        }
+
+        /* Rounded sliders */
+        .slider2.round {
+            border-radius: 70px;
+        }
+
+        .slider2.round:before {
+            border-radius: 100%;
+        }
+
+
+        .switch1 {
+            position: relative;
+            display: inline-flex;
+            width: 70px;
+            height: 20px;
+        }
+
+        .switch1 input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider1 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider1:before {
+            position: absolute;
+            content: "";
+            height: 40px;
+            width: 40px;
+            left: 0px;
+            bottom: 0px;
+            background-color: #2196F3;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider1 {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider1 {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider1:before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+        }
+
+        /* Rounded sliders */
+        .slider1.round {
+            border-radius: 70px;
+        }
+
+        .slider1.round:before {
+            border-radius: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Perfect numbers like perfect men are very rare.</h2>
+
+
+<label class="switch"><h1>GOOD</h1>
+    <input type="checkbox" id="good" onclick="choose()">
+    <span class="slider round"></span>
+</label>
+<br> <br>
+<label class="switch1"><h1>CHEAP</h1>
+    <input type="checkbox" id="cheap" onclick="choose()">
+    <span class="slider1 round"></span>
+</label>
+<br> <br>
+<label class="switch2"><h1>FAST</h1>
+    <input type="checkbox" id="fast" onclick="choose()">
+    <span class="slider2 round"></span>
+</label>
+<script>
+    let first = null;
+    let last = null;
+
+    function choose() {
+        let good = document.getElementById('good').checked;
+        let cheap = document.getElementById('cheap').checked;
+        let fast = document.getElementById('fast').checked;
+        if (cheap && good) {
+            fast = false;
+        }
+        document.getElementById('good').checked = good;
+        document.getElementById('cheap').checked = cheap;
+        document.getElementById('fast').checked = fast;
+    }
+
+</script>
+</body>
+</html>
