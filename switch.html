@@ -192,33 +192,45 @@
 
 
 <label class="switch"><h1>GOOD</h1>
-    <input type="checkbox" id="good" onclick="choose()">
+    <input type="checkbox" id="good" onclick="choose(this.id)">
     <span class="slider round"></span>
 </label>
 <br> <br>
 <label class="switch1"><h1>CHEAP</h1>
-    <input type="checkbox" id="cheap" onclick="choose()">
+    <input type="checkbox" id="cheap" onclick="choose(this.id)">
     <span class="slider1 round"></span>
 </label>
 <br> <br>
 <label class="switch2"><h1>FAST</h1>
-    <input type="checkbox" id="fast" onclick="choose()">
+    <input type="checkbox" id="fast" onclick="choose(this.id)">
     <span class="slider2 round"></span>
 </label>
 <script>
     let first = null;
     let last = null;
 
-    function choose() {
-        let good = document.getElementById('good').checked;
-        let cheap = document.getElementById('cheap').checked;
-        let fast = document.getElementById('fast').checked;
-        if (cheap && good) {
-            fast = false;
+    function choose(id) {
+        let good = document.getElementById('good');
+        let cheap = document.getElementById('cheap');
+        let fast = document.getElementById('fast');
+        switch (id) {
+            case 'good':
+                if (cheap.checked && good.checked) {
+                    fast.checked = false;
+                }
+                break;
+            case 'fast':
+                if (fast.checked && good.checked) {
+                    cheap.checked = false;
+                }
+                break;
+            case 'cheap':
+                if (cheap.checked && fast.checked) {
+                    good.checked = false;
+                }
+                break;
+
         }
-        document.getElementById('good').checked = good;
-        document.getElementById('cheap').checked = cheap;
-        document.getElementById('fast').checked = fast;
     }
 
 </script>
