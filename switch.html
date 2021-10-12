@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <style>
         .switch {
             position: relative;
@@ -77,6 +78,20 @@
             height: 0;
         }
 
+        .switch3 {
+            position: relative;
+            display: inline-flex;
+            width: 70px;
+            height: 20px;
+        }
+
+        .switch3 input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+
         .slider2 {
             position: absolute;
             cursor: pointer;
@@ -121,6 +136,53 @@
         }
 
         .slider2.round:before {
+            border-radius: 100%;
+        }
+
+        .slider3 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider3:before {
+            position: absolute;
+            content: "";
+            height: 40px;
+            width: 40px;
+            left: 0px;
+            bottom: 0px;
+            background-color: #5a417a;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider3 {
+            background-color: #5a417a;
+        }
+
+        input:focus + .slider3 {
+            box-shadow: 0 0 1px #5a417a;
+        }
+
+        input:checked + .slider3:before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+        }
+
+        /* Rounded sliders */
+        .slider3.round {
+            border-radius: 70px;
+        }
+
+        .slider3.round:before {
             border-radius: 100%;
         }
 
@@ -184,52 +246,492 @@
         .slider1.round:before {
             border-radius: 100%;
         }
+        .hide-okayyy {
+            display: none;
+        }
+        *,
+        *:after,
+        *:before {
+            box-sizing: border-box;
+        }
+        :root {
+            --transition: 0.2;
+            --bg-one: #0f0514;
+            --bg-two: #320449;
+            --stop: 40;
+            --angle: 45;
+            --border-width: 5;
+            --padlock-size: 300;
+            --border-radius: 6;
+        }
+        body {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: sans-serif;
+            background: linear-gradient(calc(var(--angle) * 1deg), var(--bg-one) calc(var(--stop) * 1%), var(--bg-two) calc(var(--stop) * 1%));
+        }
+        form {
+            display: grid;
+            grid-template-columns: auto;
+            grid-gap: 0.5rem 1rem;
+            justify-items: center;
+            position: relative;
+        }
+        [type='text'] {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-width: calc(var(--border-width) * 1px);
+            border-style: solid;
+            border-color: var(--accent);
+            border-radius: calc(var(--border-radius) * 1px);
+            text-align: center;
+            outline: transparent;
+            width: 100%;
+            transition: border-color calc(var(--transition, 0.2) * 1s) ease;
+        }
+        [type='text']:valid {
+            --accent: #5f0;
+        }
+        [type='text']:invalid {
+            --accent: rgba(255,43,0,0.5);
+        }
+        [type='text']:placeholder-shown {
+            --accent: #fff;
+        }
+        .app {
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background: #f2f2f2;
+            transform: scale(var(--scale));
+            transition: transform calc(var(--transition, 0.2) * 1s) ease;
+        }
+        [for='text'],
+        #login {
+            height: 0;
+            width: 0;
+            transform: scale(0);
+            position: absolute;
+        }
+        .logout-button {
+            --size: 52;
+            --lightness: 45;
+            height: calc(var(--size) * 1px);
+            padding: 12px 200px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            background: mediumpurple;
+            border: 0;
+            border-radius: calc(var(--border-radius) * 1px);
+            cursor: pointer;
+        }
+        .logout-button:hover {
+            --lightness: 30;
+        }
+        .logout-button:active {
+            --lightness: 20;
+        }
+        .login-button {
+            --size: 52;
+            --lightness: 45;
+            align-items: center;
+            background: hsl(100, 80%, calc(var(--lightness) * 1%));
+            border-radius: calc(var(--border-radius) * 1px);
+            cursor: pointer;
+            display: flex;
+            height: calc(var(--size) * 1px);
+            justify-content: center;
+            padding: 12px 200px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            width: 100%;
+            transition: background calc(var(--transition, 0.2) * 1s) ease;
+        }
+        .login-button svg {
+            transform: translate(50%, 0);
+        }
+        .login-button * {
+            cursor: pointer;
+        }
+        .login-button:hover {
+            --lightness: 30;
+        }
+        .login-button:active {
+            --lightness: 20;
+        }
+        .login-button svg {
+            height: 24px;
+            width: 24px;
+        }
+        .login-button svg path {
+            fill: #fff;
+        }
+        .padlock {
+            --hue: 65;
+            --color: #ffd500;
+            --color-one: #ffa200;
+            --color-two: #fff;
+            height: calc(var(--padlock-size) * 1px);
+            width: calc(var(--padlock-size) * 1px);
+            grid-row: 1;
+            position: relative;
+        }
+        .padlock__body {
+            border: 8px solid #000;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 10%;
+            width: 66%;
+            height: 46%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background: var(--color);
+            box-shadow: -30px 0 0px 0px var(--color-one) inset, 10px 0 0px 0px var(--color-two) inset;
+        }
+        .padlock__face {
+            height: 25%;
+            width: 40%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .padlock__eye {
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background: #000;
+            top: 0;
+            border-radius: 50%;
+            animation: blink 4s infinite linear;
+        }
+        .padlock__eye:after {
+            content: '';
+            height: 25%;
+            width: 25%;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-100%, -100%);
+        }
+        .padlock__eye--left {
+            left: 0;
+        }
+        .padlock__eye--right {
+            right: 0;
+        }
+        @-moz-keyframes blink {
+            0%, 24%, 27%, 100% {
+                transform: scaleY(1);
+            }
+            25%, 26% {
+                transform: scaleY(0);
+            }
+        }
+        @-webkit-keyframes blink {
+            0%, 24%, 27%, 100% {
+                transform: scaleY(1);
+            }
+            25%, 26% {
+                transform: scaleY(0);
+            }
+        }
+        @-o-keyframes blink {
+            0%, 24%, 27%, 100% {
+                transform: scaleY(1);
+            }
+            25%, 26% {
+                transform: scaleY(0);
+            }
+        }
+        @keyframes blink {
+            0%, 24%, 27%, 100% {
+                transform: scaleY(1);
+            }
+            25%, 26% {
+                transform: scaleY(0);
+            }
+        }
+        .padlock__mouth {
+            width: 25%;
+            height: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .padlock__mouth--one {
+            background: #000;
+            height: 5px;
+            width: 40%;
+            left: 45%;
+            bottom: 25%;
+            display: block;
+        }
+        .padlock__mouth--two,
+        .padlock__mouth--three {
+            height: 24px;
+            width: 20px;
+            border-radius: 50%;
+            bottom: 24%;
+            background: transparent;
+            -webkit-clip-path: inset(64% 0 0 0);
+            clip-path: inset(64% 0 0 0);
+            display: none;
+            overflow: hidden;
+        }
+        .padlock__mouth--two:before,
+        .padlock__mouth--three:before {
+            content: '';
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            border: 4px solid #000;
+        }
+        .padlock__mouth--three {
+            background: #000;
+        }
+        .padlock__mouth--three:after {
+            content: '';
+            position: absolute;
+            height: 6px;
+            width: 10px;
+            border-radius: 50%;
+            bottom: -2px;
+            left: 40%;
+            background: #f00;
+        }
+        .padlock__hook {
+            --delay: 1;
+            --clip: 40;
+            width: 50%;
+            height: 90%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, calc(var(--pos, 40) * -1%));
+            -webkit-clip-path: inset(0 0 30% 0);
+            clip-path: inset(0 0 30% 0);
+            transition: transform calc(var(--transition, 0.2) * 1s) calc(((var(--transition, 0.2) * 1.5) * var(--delay, 0)) * 1s) cubic-bezier(0.78, 0.16, 0.64, 1.8);
+        }
+        .padlock__hook:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            border-radius: 50%/40%;
+            transform: translate(-50%, -50%);
+            box-shadow: 5px 0 0 0 #fff inset, -10px 0 0 0 #666 inset;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
+        }
+        .padlock__hook > div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .padlock__hook > div:nth-of-type(1) {
+            width: 100%;
+            height: 100%;
+            border: 36px solid #000;
+            border-radius: 50%/40%;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(calc(var(--clip) * 1%) + 8px), 50% calc(calc(var(--clip) * 1%) + 8px), 50% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% calc(calc(var(--clip) * 1%) + 8px), 50% calc(calc(var(--clip) * 1%) + 8px), 50% 100%, 0 100%);
+        }
+        .padlock__hook > div:nth-of-type(2) {
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            border: 20px solid #bfbfbf;
+            border-radius: 50%/40%;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
+        }
+        .logout-message {
+            display: block;
+            width: 100%;
+            border-radius: calc(var(--border-radius) * 1px);
+            padding: 1rem;
+            background: #fff;
+            text-align: center;
+            font-weight: bold;
+        }
+        #login:checked ~ .app {
+            --scale: 1;
+        }
+        [type='text']:valid ~ #login,
+        [type='text']:valid ~ [for='login'] {
+            visibility: visible;
+        }
+        [type='text']:valid ~ #login:hover ~ .padlock .padlock__mouth--one,
+        [type='text']:valid ~ [for='login']:hover ~ .padlock .padlock__mouth--one,
+        [type='text']:valid ~ #login:hover ~ .padlock .padlock__mouth--two,
+        [type='text']:valid ~ [for='login']:hover ~ .padlock .padlock__mouth--two {
+            display: none;
+        }
+        [type='text']:valid ~ #login:hover ~ .padlock .padlock__mouth--three,
+        [type='text']:valid ~ [for='login']:hover ~ .padlock .padlock__mouth--three {
+            display: block;
+        }
+        [type='text']:valid ~ .padlock .padlock__mouth--one {
+            display: none;
+        }
+        [type='text']:valid ~ .padlock .padlock__mouth--two {
+            display: block;
+        }
+        [type='text']:valid ~ .padlock .padlock__hook {
+            --pos: 60;
+            --delay: 0;
+        }
+        [type='text']:placeholder-shown ~ .app {
+            transition: transform 0s 0s ease;
+        }
+        .app:focus-within ~ .logout-message {
+            visibility: visible;
+            grid-row: 3;
+        }
+        #login,
+        [for='login'],
+        .logout-message {
+            visibility: hidden;
+        }
+        .app {
+            --scale: 0;
+        }
+        h3 {
+            color: mediumpurple;
+        }
     </style>
 </head>
 <body>
-
-<h2> Perfect numbers like perfect men are very rare.</h2>
-
-
-<label class="switch"><h1>GOOD</h1>
-    <input type="checkbox" id="good" onclick="choose(this.id)">
-    <span class="slider round"></span>
-</label>
-<br> <br>
-<label class="switch1"><h1>CHEAP</h1>
-    <input type="checkbox" id="cheap" onclick="choose(this.id)">
-    <span class="slider1 round"></span>
-</label>
-<br> <br>
-<label class="switch2"><h1>FAST</h1>
-    <input type="checkbox" id="fast" onclick="choose(this.id)">
-    <span class="slider2 round"></span>
-</label>
+<form onsubmit="return false;">
+    <label style="color: mediumpurple" for="password">hi hi hi</label>
+    <input id="password" type="text"
+           pattern="^[a-zA-Z0-9_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ,\s]+$"
+           placeholder="Nhập vào vài thứ mà bạn thích, cách nhau bởi dấu phấy"
+           required="required"
+           title="Tôi đã bảo là nhập vào một vài thứ, cách nhau bằng dấu phẩy ',' cơ màaa"/><input
+        id="login" type="checkbox"/>
+    <label class="login-button" for="login" onclick="getString()">
+        <span>Enter</span>
+        <svg>
+            <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
+        </svg>
+    </label>
+    <div class="padlock">
+        <div class="padlock__hook">
+            <div class="padlock__hook-body"></div>
+            <div class="padlock__hook-body"></div>
+        </div>
+        <div class="padlock__body">
+            <div class="padlock__face">
+                <div class="padlock__eye padlock__eye--left"></div>
+                <div class="padlock__eye padlock__eye--right"></div>
+                <div class="padlock__mouth padlock__mouth--one"></div>
+                <div class="padlock__mouth padlock__mouth--two"></div>
+                <div class="padlock__mouth padlock__mouth--three"></div>
+            </div>
+        </div>
+    </div>
+    <div class="app">
+        <h2 style="color: mediumpurple"> Perfect numbers like perfect men are very rare. :)))) 🎉🎉🎉</h2>
+        <br>
+        <br>
+        <div class="game"> <br>
+            <label class="switch"><h3 id="first-item"></h3>
+                <input type="checkbox" id="good" onclick="choose(this.id)">
+                <span class="slider round"></span>
+            </label>
+            <br> <br>
+            <br> <br>
+            <label class="switch1"><h3 id="first-item1"></h3>
+                <input type="checkbox" id="cheap" onclick="choose(this.id)">
+                <span class="slider1 round"></span>
+            </label>
+            <br> <br>
+            <br> <br>
+            <label class="switch2"><h3 id="first-item2"></h3>
+                <input type="checkbox" id="fast" onclick="choose(this.id)">
+                <span class="slider2 round"></span>
+            </label>
+            <br> <br>
+            <br> <br>
+            <label class="switch3"><h3 id="first-item3"></h3>
+                <input type="checkbox" id="hehe" onclick="choose(this.id)">
+                <span class="slider3 round"></span>
+            </label>
+        </div>
+        <br> <br>
+        <br> <br><br> <br>
+        <br> <br>
+        <button class="logout-button" type="reset">Không thèm chơi nữa</button>
+    </div>
+    <span class="logout-message">Mày đã thoát.</span>
+</form>
 <script>
     let first = null;
     let last = null;
 
+    function getString() {
+        let stringInput = document.getElementById("password").value;
+        console.log(stringInput);
+        stringInput = stringInput.split(",");
+        console.log(stringInput);
+        let text1 = (typeof(stringInput[0]) !== 'undefined' && stringInput[0].trim().length > 0) ? stringInput[0] : "có tiền";
+        let text2 = (typeof(stringInput[1]) !== 'undefined' && stringInput[1].trim().length > 0) ? stringInput[1] : "có sức khỏe";
+        let text3 = (typeof(stringInput[2]) !== 'undefined' && stringInput[2].trim().length > 0) ? stringInput[2] : "có niềm vui";
+        let text4 = (typeof(stringInput[3]) !== 'undefined' && stringInput[3].trim().length > 0) ? stringInput[3] : "có gấu";
+        console.log(text1);
+        console.log(text2);
+        console.log(text3);
+        document.getElementById("first-item").innerHTML = text1;
+        document.getElementById("first-item1").innerHTML = text2;
+        document.getElementById("first-item2").innerHTML = text3;
+        document.getElementById("first-item3").innerHTML = text4;
+    }
     function choose(id) {
         let good = document.getElementById('good');
         let cheap = document.getElementById('cheap');
         let fast = document.getElementById('fast');
+        let hehe = document.getElementById('hehe');
         switch (id) {
-            case 'good':
-                if (cheap.checked && good.checked) {
+            case 'hehe':
+                if (cheap.checked && fast.checked && hehe.checked) {
                     fast.checked = false;
                 }
                 break;
-            case 'fast':
-                if (fast.checked && good.checked) {
+            case 'good':
+                if (cheap.checked && good.checked && hehe.checked) {
                     cheap.checked = false;
+                }
+                break;
+            case 'fast':
+                if (fast.checked && good.checked && hehe.checked) {
+                    good.checked = false;
                 }
                 break;
             case 'cheap':
                 if (cheap.checked && fast.checked) {
-                    good.checked = false;
+                    hehe.checked = false;
                 }
                 break;
-
         }
     }
 
